@@ -15,7 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FeedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public objetoFeed = {
+    titulo: 'Esse aliqua duis ea fugiat',
+    data: '2 de janeiro de 2017',
+    descricao: 'Voluptate quis proident irure ad deserunt eu dolore dolor cupidatat exercitation cillum culpa.',
+    qde_likes: 12,
+    qde_comments: 4,
+    ultimo_comment: 'Há 11 horas',
+  };
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+
   }
 
   ionViewDidLoad() {
