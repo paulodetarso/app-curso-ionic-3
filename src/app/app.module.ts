@@ -16,7 +16,6 @@ import { FeedPage } from '../pages/feed/feed';
 import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPage } from '../pages/intro/intro';
 import { IntroPageModule } from '../pages/intro/intro.module';
-import { MovieProvider } from '../providers/movie/movie';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { MovieProvider } from '../providers/movie/movie';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MovieProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

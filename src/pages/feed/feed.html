@@ -24,18 +24,18 @@
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{ filme.qde_likes + (qde_likes === 1 ? ' like' : ' likes') }}</div>
+          <div>{{ objetoFeed.qde_likes + (objetoFeed.qde_likes === 1 ? ' like' : ' likes') }}</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>{{ filme.qde_comments + (qde_comments === 1 ? ' comentário' : ' comentários') }}</div>
+          <div>{{ objetoFeed.qde_comments + (objetoFeed.qde_comments === 1 ? ' comentário' : ' comentários') }}</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          {{ filme.ultimo_comment }}
+          {{ filme.release_date }}
         </ion-note>
       </ion-col>
     </ion-row>
