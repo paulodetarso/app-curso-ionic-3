@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
-import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the FeedPage page.
@@ -20,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FeedPage {
 
-  public objetoFeed = {
+  objetoFeed = {
     titulo: 'Esse aliqua duis ea fugiat',
     data: '2 de janeiro de 2017',
     descricao: 'Voluptate quis proident irure ad deserunt eu dolore dolor cupidatat exercitation cillum culpa.',
@@ -28,6 +27,8 @@ export class FeedPage {
     qde_comments: 4,
     ultimo_comment: 'Há 11 horas',
   };
+
+  listaFilmes = new Array<any>();
 
   constructor(
     public navCtrl: NavController,
@@ -41,8 +42,13 @@ export class FeedPage {
     this.movieProvider.getLatestMovies()
       .subscribe(
         response => {
-          const results = response as Observable<Object>;
-          console.log(results);
+          const data = response as any;
+          try {
+            this.listaFilmes = data.results;
+            console.log(this.listaFilmes);
+          } catch(e) {
+            console.error(e);
+          }
         },
         error => {
           console.error(error);

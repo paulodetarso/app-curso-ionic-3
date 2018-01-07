@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the MovieProvider provider.
@@ -12,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class MovieProvider {
 
   private urlBase  = 'https://api.themoviedb.org/3/';
-  private action   = 'movie/latest';
+  private action   = 'movie/popular';
   private apiKey   = 'api_key=46d0815688e80d48b9321e430647a08b';
   private language = 'language=pt-BR';
 
@@ -22,7 +21,7 @@ export class MovieProvider {
 
   }
 
-  getLatestMovies(): Observable<Object> {
+  getLatestMovies(): any {
     return this.http.get(this.urlBase + this.action + '?' + this.apiKey + '&' + this.language);
   }
 }

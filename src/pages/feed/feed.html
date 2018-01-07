@@ -5,37 +5,37 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngFor="let filme of listaFilmes">
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/avatar.png">
       </ion-avatar>
-      <h2>{{ objetoFeed.titulo }}</h2>
-      <p>{{ objetoFeed.data }}</p>
+      <h2>{{ filme.original_title }}</h2>
+      <p>{{ filme.release_date }}</p>
     </ion-item>
 
-    <img src="assets/imgs/feed-image.png">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path">
 
     <ion-card-content>
-      <p>{{ objetoFeed.descricao }}</p>
+      <p>{{ filme.overview }}</p>
     </ion-card-content>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{ objetoFeed.qde_likes + (qde_likes === 1 ? ' like' : ' likes') }}</div>
+          <div>{{ filme.qde_likes + (qde_likes === 1 ? ' like' : ' likes') }}</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>{{ objetoFeed.qde_comments + (qde_comments === 1 ? ' comentário' : ' comentários') }}</div>
+          <div>{{ filme.qde_comments + (qde_comments === 1 ? ' comentário' : ' comentários') }}</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          {{ objetoFeed.ultimo_comment }}
+          {{ filme.ultimo_comment }}
         </ion-note>
       </ion-col>
     </ion-row>
