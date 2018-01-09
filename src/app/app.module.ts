@@ -15,6 +15,9 @@ import { ConfigProvider } from '../providers/config/config';
 import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { HomePageModule } from '../pages/home/home.module';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { HomePageModule } from '../pages/home/home.module';
     IntroPageModule,
     HomePageModule,
     FeedPageModule,
+    ConfiguracoesPageModule,
+    PerfilPageModule,
+    SobrePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
