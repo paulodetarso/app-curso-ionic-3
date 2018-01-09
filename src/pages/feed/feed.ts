@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
-
-/**
- * Generated class for the FeedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ConfigProvider } from '../../providers/config/config';
 
 @IonicPage()
 @Component({
@@ -31,11 +25,10 @@ export class FeedPage {
   listaFilmes = new Array<any>();
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private movieProvider: MovieProvider
+    public movieProvider: MovieProvider,
+    public appConfig: ConfigProvider
   ) {
-
+    this.appConfig.setConfig('showSlide', false);
   }
 
   ionViewDidLoad(): void {
