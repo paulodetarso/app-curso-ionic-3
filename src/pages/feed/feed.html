@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="refreshPage($event)">
+    <!-- <ion-refresher-content></ion-refresher-content> -->
+  </ion-refresher>
+
   <ion-card *ngFor="let filme of listaFilmes">
     <ion-item>
       <ion-avatar item-start>

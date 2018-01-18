@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 import { ConfigProvider } from '../../providers/config/config';
 
@@ -23,29 +23,68 @@ export class FeedPage {
   };
 
   listaFilmes = new Array<any>();
+  loader = null;
+  refresher = null;
+  isRefreshing = false;
 
   constructor(
     public movieProvider: MovieProvider,
-    public appConfig: ConfigProvider
+    public appConfig: ConfigProvider,
+    public loadingCtrl: LoadingController
   ) {
     this.appConfig.setConfig('showSlide', false);
   }
 
-  ionViewDidLoad(): void {
+  refreshPage(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+    this.carregarFilmes();
+  }
+
+  showLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: 'Carregando...'
+      // duration: 3000
+    });
+    this.loader.present();
+  }
+
+  closeLoading() {
+    this.loader.dismiss();
+  }
+
+  carregarFilmes() {
+    this.showLoading();
     this.movieProvider.getLatestMovies()
       .subscribe(
-        response => {
-          const data = response as any;
-          try {
-            this.listaFilmes = data.results;
-            console.log(this.listaFilmes);
-          } catch(e) {
-            console.error(e);
-          }
-        },
-        error => {
-          console.error(error);
+      (response) => {
+        const data = response as any;
+        try {
+          this.listaFilmes = data.results;
+          console.log(this.listaFilmes);
+        } catch (e) {
+          console.error(e);
         }
-      );
+        this.closeLoading();
+
+        if (this.isRefreshing) {
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.closeLoading();
+
+        if (this.isRefreshing) {
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
+      });
+  }
+
+  // `ionViewDidLoad()` só é executado uma vez
+  ionViewDidEnter(): void {
+    this.carregarFilmes();
   }
 }
