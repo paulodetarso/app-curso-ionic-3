@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 
 @IonicPage()
@@ -15,15 +15,32 @@ export class FilmeDetalhesPage {
   filme;
   idFilme;
 
+  loader = null;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public movieProvider: MovieProvider
+    public movieProvider: MovieProvider,
+    public loadingCtrl: LoadingController
   ) {
+    this.filme = null;
+    this.idFilme = null;
+  }
 
+  showLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: 'Carregando...'
+      // duration: 3000
+    });
+    this.loader.present();
+  }
+
+  closeLoading() {
+    this.loader.dismiss();
   }
 
   ionViewDidEnter() {
+    this.showLoading();
     this.idFilme = this.navParams.get('id');
     this.movieProvider.getMovieDetails(this.idFilme)
     .subscribe(
@@ -34,22 +51,11 @@ export class FilmeDetalhesPage {
         } catch (e) {
           console.error(e);
         }
-        // this.closeLoading();
-
-        // if (this.isRefreshing) {
-        //   this.refresher.complete();
-        //   this.isRefreshing = false;
-        // }
+        this.closeLoading();
       },
       (error) => {
         console.error(error);
-        // this.closeLoading();
-
-        // if (this.isRefreshing) {
-        //   this.refresher.complete();
-        //   this.isRefreshing = false;
-        // }
-      });
-
+        this.closeLoading();
+     });
   }
 }

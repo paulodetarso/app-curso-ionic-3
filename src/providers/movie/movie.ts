@@ -12,7 +12,6 @@ export class MovieProvider {
 
   private urlBase    = 'https://api.themoviedb.org/';
   private apiVersion = '3';
-  private action     = 'movie/popular';
   private apiKey     = 'api_key=46d0815688e80d48b9321e430647a08b';
   private language   = 'language=pt-BR';
 
