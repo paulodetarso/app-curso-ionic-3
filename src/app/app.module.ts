@@ -18,6 +18,7 @@ import { HomePageModule } from '../pages/home/home.module';
 import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
 import { PerfilPageModule } from '../pages/perfil/perfil.module';
 import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { FilmeDetalhesPageModule } from '../pages/filme-detalhes/filme-detalhes.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SobrePageModule } from '../pages/sobre/sobre.module';
     ConfiguracoesPageModule,
     PerfilPageModule,
     SobrePageModule,
+    FilmeDetalhesPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

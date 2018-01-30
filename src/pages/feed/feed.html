@@ -19,7 +19,7 @@
       <p>{{ filme.release_date }}</p>
     </ion-item>
 
-    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path" (click)="abrirDetalhes(filme)">
 
     <ion-card-content>
       <p>{{ filme.overview }}</p>

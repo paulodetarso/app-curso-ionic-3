@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 import { ConfigProvider } from '../../providers/config/config';
+import { FilmeDetalhesPage } from '../filme-detalhes/filme-detalhes';
 
 @IonicPage()
 @Component({
@@ -28,11 +29,12 @@ export class FeedPage {
   isRefreshing = false;
 
   constructor(
+    public navCtrl: NavController,
     public movieProvider: MovieProvider,
     public appConfig: ConfigProvider,
     public loadingCtrl: LoadingController
   ) {
-    this.appConfig.setConfig('showSlide', false);
+
   }
 
   refreshPage(refresher) {
@@ -61,7 +63,6 @@ export class FeedPage {
         const data = response as any;
         try {
           this.listaFilmes = data.results;
-          console.log(this.listaFilmes);
         } catch (e) {
           console.error(e);
         }
@@ -86,5 +87,9 @@ export class FeedPage {
   // `ionViewDidLoad()` só é executado uma vez
   ionViewDidEnter(): void {
     this.carregarFilmes();
+  }
+
+  abrirDetalhes(filme) {
+    this.navCtrl.push(FilmeDetalhesPage, { id: filme.id });
   }
 }

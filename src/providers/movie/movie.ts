@@ -10,10 +10,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MovieProvider {
 
-  private urlBase  = 'https://api.themoviedb.org/3/';
-  private action   = 'movie/popular';
-  private apiKey   = 'api_key=46d0815688e80d48b9321e430647a08b';
-  private language = 'language=pt-BR';
+  private urlBase    = 'https://api.themoviedb.org/';
+  private apiVersion = '3';
+  private action     = 'movie/popular';
+  private apiKey     = 'api_key=46d0815688e80d48b9321e430647a08b';
+  private language   = 'language=pt-BR';
 
   constructor(
     public http: HttpClient
@@ -21,7 +22,11 @@ export class MovieProvider {
 
   }
 
-  getLatestMovies(): any {
-    return this.http.get(this.urlBase + this.action + '?' + this.apiKey + '&' + this.language);
+  getLatestMovies() {
+    return this.http.get(`${this.urlBase}/${this.apiVersion}/movie/popular?${this.apiKey}&${this.language}`);
+  }
+  
+  getMovieDetails(idFilme) {
+    return this.http.get(`${this.urlBase}/${this.apiVersion}/movie/${idFilme}?${this.apiKey}&${this.language}`);
   }
 }
