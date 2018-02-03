@@ -23,10 +23,12 @@ export class FeedPage {
     ultimo_comment: 'Há 11 horas',
   };
 
-  listaFilmes = new Array<any>();
+  listaFilmes = new Array<Object>();
   loader = null;
   refresher = null;
   isRefreshing = false;
+  paginaAtual = 1;
+  infiniteScroll;
 
   constructor(
     public navCtrl: NavController,
@@ -57,17 +59,27 @@ export class FeedPage {
 
   carregarFilmes() {
     this.showLoading();
-    this.movieProvider.getLatestMovies()
+    this.movieProvider.getLatestMovies(this.paginaAtual)
       .subscribe(
       (response) => {
         const data = response as any;
+        const results = data.results as Array<Object>;
+
         try {
-          this.listaFilmes = data.results;
+          if (this.listaFilmes.length && typeof this.infiniteScroll != 'undefined') {
+            this.infiniteScroll.complete();
+          }
+
+          if (results.length > 0) {
+            results.forEach((filme) => {
+              this.listaFilmes.push(filme);
+            });
+          }
         } catch (e) {
           console.error(e);
         }
         this.closeLoading();
-
+        
         if (this.isRefreshing) {
           this.refresher.complete();
           this.isRefreshing = false;
@@ -85,11 +97,19 @@ export class FeedPage {
   }
 
   // `ionViewDidLoad()` só é executado uma vez
-  ionViewDidEnter(): void {
-    this.carregarFilmes();
+  ionViewDidEnter() {
+    if (this.listaFilmes.length === 0) {
+      this.carregarFilmes();
+    }
   }
 
   abrirDetalhes(filme) {
     this.navCtrl.push(FilmeDetalhesPage, { id: filme.id });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.paginaAtual++;
+    this.infiniteScroll = infiniteScroll;
+    this.carregarFilmes();
   }
 }

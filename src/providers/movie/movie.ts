@@ -21,8 +21,9 @@ export class MovieProvider {
 
   }
 
-  getLatestMovies() {
-    return this.http.get(`${this.urlBase}/${this.apiVersion}/movie/popular?${this.apiKey}&${this.language}`);
+  getLatestMovies(pagina = 1) {
+    // return this.http.get(`${this.urlBase}/${this.apiVersion}/movie/popular?${this.apiKey}&${this.language}`);
+    return this.http.get(`${this.urlBase}/${this.apiVersion}/movie/popular?${this.apiKey}&${this.language}&page=${pagina}`);
   }
   
   getMovieDetails(idFilme) {
